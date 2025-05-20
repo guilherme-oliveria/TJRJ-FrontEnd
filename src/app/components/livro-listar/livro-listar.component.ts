@@ -79,4 +79,20 @@ export class LivroListarComponent implements OnInit {
       this.messageClass = '';
     }, 5000);
   }
+
+  downloadRelatorio() {
+    this.livroService.downloadRelatorioLivrosPorAutor().subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'livros_por_autor.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error(`Erro ao excluir livro: ${err.error.message}`);
+      }
+    });
+  }
 }
