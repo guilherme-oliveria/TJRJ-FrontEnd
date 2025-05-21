@@ -1,7 +1,7 @@
 export class Ambiente {
-  back: string;
+    back: string;
 
-  constructor(back: string) {
-    this.back = back;
-  }
+    constructor(back: string) {
+        this.back = back;
+    }
 }

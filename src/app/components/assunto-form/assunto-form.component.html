@@ -1,1 +1,33 @@
-<p>assunto-form works!</p>
+<div class="container mt-4">
+    <h2>{{ assuntoForm.get('id')?.value ? 'Editar Assunto' : 'Cadastrar Assunto' }}</h2>
+
+    <form [formGroup]="assuntoForm" (ngSubmit)="saveAssunto()">
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <input
+                id="descricao"
+                type="text"
+                class="form-control"
+                formControlName="descricao"
+                [class.is-invalid]="assuntoForm.get('descricao')?.invalid && assuntoForm.get('descricao')?.touched"
+            />
+            <div class="invalid-feedback"
+                 *ngIf="assuntoForm.get('descricao')?.invalid && assuntoForm.get('descricao')?.touched">
+                Por favor, preencha uma descrição válida (3 a 20 caracteres).
+            </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                {{ isLoading ? 'Salvando...' : 'Salvar' }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/assunto'])">
+                <i class="bi bi-arrow-left me-1"></i> Cancelar
+            </button>
+        </div>
+    </form>
+</div>

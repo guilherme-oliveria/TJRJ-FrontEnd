@@ -1,27 +1,32 @@
 <div class="container mt-4">
-  <h2>{{ autorForm.get('id')?.value ? 'Editar Autor' : 'Cadastrar Autor' }}</h2>
+    <h2>{{ autorForm.get('id')?.value ? 'Editar Autor' : 'Cadastrar Autor' }}</h2>
 
-  <form [formGroup]="autorForm" (ngSubmit)="saveAutor()">
-    <div class="mb-3">
-      <label for="nome" class="form-label">Nome</label>
-      <input
-        id="nome"
-        type="text"
-        class="form-control"
-        formControlName="nome"
-        [class.is-invalid]="autorForm.get('nome')?.invalid && autorForm.get('nome')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="autorForm.get('nome')?.invalid && autorForm.get('nome')?.touched">
-        Por favor, preencha um nome válida (3 a 40 caracteres).
-      </div>
-    </div>
+    <form [formGroup]="autorForm" (ngSubmit)="saveAutor()">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+                id="nome"
+                type="text"
+                class="form-control"
+                formControlName="nome"
+                [class.is-invalid]="autorForm.get('nome')?.invalid && autorForm.get('nome')?.touched"
+            />
+            <div class="invalid-feedback" *ngIf="autorForm.get('nome')?.invalid && autorForm.get('nome')?.touched">
+                Por favor, preencha um nome válida (3 a 40 caracteres).
+            </div>
+        </div>
 
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
-      {{ isLoading ? 'Salvando...' : 'Salvar' }}
-    </button>
-  </form>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                {{ isLoading ? 'Salvando...' : 'Salvar' }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="router.navigate(['/autor'])">
+                <i class="bi bi-arrow-left me-1"></i> Cancelar
+            </button>
+        </div>
+    </form>
 </div>

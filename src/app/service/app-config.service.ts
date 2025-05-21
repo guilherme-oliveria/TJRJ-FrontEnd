@@ -1,33 +1,33 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Ambiente} from "../model/ambiente";
 import {map} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable(
-  {
-    providedIn: 'root'
-  }
+    {
+        providedIn: 'root'
+    }
 )
 export class AppConfigService {
-  private config: Ambiente | undefined;
+    private config: Ambiente | undefined;
 
-  constructor(private http: HttpClient) {
-    this.loadConfig().then(config => {
-    });
-  }
+    constructor(private http: HttpClient) {
+        this.loadConfig().then(config => {
+        });
+    }
 
-  async loadConfig(): Promise<string> {
-     // @ts-ignore
-    return await this.http.get('/assets/config.json').pipe(
-      map(config => {
+    async loadConfig(): Promise<string> {
         // @ts-ignore
-        this.config = new Ambiente(config['back']);
-        return this.config.back;
-      })
-    ).toPromise();
-  }
+        return await this.http.get('/assets/config.json').pipe(
+            map(config => {
+                // @ts-ignore
+                this.config = new Ambiente(config['back']);
+                return this.config.back;
+            })
+        ).toPromise();
+    }
 
-  get ambiente(): Ambiente {
-    return <Ambiente>this.config;
-  }
+    get ambiente(): Ambiente {
+        return <Ambiente>this.config;
+    }
 }

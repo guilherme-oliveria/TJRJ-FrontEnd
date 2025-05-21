@@ -1,64 +1,72 @@
 <div class="container mt-4">
+    <h2 class="mb-4">Lista de Livros</h2>
 
-  <h2 class="mb-4">Lista de Livros</h2>
-
-  <div class="mb-3 text-end">
-    <button class="btn btn-outline-secondary" (click)="downloadRelatorio()">
-      <i class="bi bi-download me-1"></i> Baixar relatório PDF
-    </button>
-  </div>
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Título</th>
-      <th>Editora</th>
-      <th>Edição</th>
-      <th>Ano</th>
-      <th>Valor</th>
-      <th style="width: 150px;">Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let livro of livros">
-      <td>{{ livro.id }}</td>
-      <td>{{ livro.titulo }}</td>
-      <td>{{ livro.editora }}</td>
-      <td>{{ livro.edicao }}</td>
-      <td>{{ livro.anoPublicacao }}</td>
-      <td>{{ livro.valor | currency:'BRL' }}</td>
-      <td>
-        <button class="btn btn-sm btn-primary me-2" (click)="editLivro(livro)">Editar</button>
-        <button class="btn btn-sm btn-danger" (click)="openDeleteModal(livro)">Excluir</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="showDeleteModal" class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h5 class="modal-title">Confirmação de Exclusão</h5>
-          <button type="button" class="btn-close" aria-label="Close" (click)="cancelDelete()"></button>
+    <div class="row align-items-center mb-3">
+        <div class="col">
+            <button class="btn btn-success" (click)="createLivro()">
+                <i class="bi bi-plus-lg me-1"></i> Criar Livro
+            </button>
         </div>
-
-        <div class="modal-body">
-          <p>Deseja excluir o livro <strong>{{ livroToDelete?.titulo }}</strong>?</p>
+        <div class="col text-end">
+            <button class="btn btn-outline-secondary" (click)="downloadRelatorio()">
+                <i class="bi bi-download me-1"></i> Baixar relatório PDF
+            </button>
         </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancelar</button>
-          <button type="button" class="btn btn-danger" (click)="confirmDelete()">Excluir</button>
-        </div>
-
-      </div>
     </div>
-  </div>
 
-  <div *ngIf="message" class="alert" [ngClass]="messageClass" role="alert">
-    {{ message }}
-  </div>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Editora</th>
+            <th>Edição</th>
+            <th>Ano</th>
+            <th>Valor</th>
+            <th style="width: 150px;">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let livro of livros">
+            <td>{{ livro.id }}</td>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.edicao }}</td>
+            <td>{{ livro.anoPublicacao }}</td>
+            <td>{{ livro.valor | currency:'BRL' }}</td>
+            <td>
+                <button class="btn btn-sm btn-primary me-2" (click)="editLivro(livro)">Editar</button>
+                <button class="btn btn-sm btn-danger" (click)="openDeleteModal(livro)">Excluir</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="showDeleteModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+         style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmação de Exclusão</h5>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="cancelDelete()"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>Deseja excluir o livro <strong>{{ livroToDelete?.titulo }}</strong>?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancelar</button>
+                    <button type="button" class="btn btn-danger" (click)="confirmDelete()">Excluir</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="message" class="alert" [ngClass]="messageClass" role="alert">
+        {{ message }}
+    </div>
 </div>
 
